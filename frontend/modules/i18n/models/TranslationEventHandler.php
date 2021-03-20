@@ -2,8 +2,8 @@
 
 namespace frontend\modules\i18n\models;
 
-use frontend\modules\i18n\models\records\I18nMessage;
-use frontend\modules\i18n\models\records\I18nSourceMessage;
+use frontend\modules\i18n\models\records\i18nMessage\I18nMessage;
+use frontend\modules\i18n\models\records\i18nSourceMessage\I18nSourceMessage;
 use yii\i18n\MissingTranslationEvent;
 
 /**

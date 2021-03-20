@@ -1,7 +1,8 @@
 <?php
 
-namespace frontend\modules\i18n\models\records;
+namespace frontend\modules\i18n\models\records\i18nMessage;
 
+use frontend\modules\i18n\models\records\i18nSourceMessage\I18nSourceMessage;
 use Yii;
 
 /**
@@ -13,16 +14,8 @@ use Yii;
  *
  * @property I18nSourceMessage $id0
  */
-class I18nMessage extends \yii\db\ActiveRecord
+class I18nMessageValidation extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'i18n_message';
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -51,7 +44,7 @@ class I18nMessage extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Id0]].
+     * Connection [[I18nSourceMessage]].
      *
      * @return \yii\db\ActiveQuery
      */

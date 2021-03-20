@@ -1,7 +1,8 @@
 <?php
 
-namespace frontend\modules\i18n\models\records;
+namespace frontend\modules\i18n\models\records\i18nSourceMessage;
 
+use frontend\modules\i18n\models\records\i18nMessage\I18nMessage;
 use Yii;
 
 /**
@@ -13,7 +14,7 @@ use Yii;
  *
  * @property I18nMessage[] $i18nMessages
  */
-class I18nSourceMessage extends \yii\db\ActiveRecord
+class I18nSourceMessageValidation extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -48,7 +49,7 @@ class I18nSourceMessage extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[I18nMessages]].
+     * Connection [[I18nMessage]].
      *
      * @return \yii\db\ActiveQuery
      */
