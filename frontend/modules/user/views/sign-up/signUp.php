@@ -11,30 +11,29 @@ use yii\helpers\Html;
 $this->title = 'Sign up';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="site-sign-up">
+    <div class="col-lg-5 mx-auto mt-5 border rounded bg-white">
+        <p class="text-center mt-3">Please fill out the following fields to sign up:</p>
+        <div class="row">
+            <div class="col-12">
+                <?php $form = ActiveForm::begin(['id' => 'sign-up-form']); ?>
 
-    <p>Please fill out the following fields to sign up:</p>
+                <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'sign-up-form']); ?>
+                <?= $form->field($model, 'password')->passwordInput() ?>
 
-            <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'nickname') ?>
 
-            <?= $form->field($model, 'password')->passwordInput() ?>
+                <?= $form->field($model, 'first_name') ?>
 
-            <?= $form->field($model, 'nickname') ?>
+                <?= $form->field($model, 'last_name') ?>
 
-            <?= $form->field($model, 'first_name') ?>
+                <div class="row form-group">
+                    <?= Html::submitButton('Sign up', ['class' => 'btn btn-primary mx-auto', 'name' => 'signup-button']) ?>
+                </div>
 
-            <?= $form->field($model, 'last_name') ?>
-
-            <div class="form-group">
-                <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                <?php ActiveForm::end(); ?>
             </div>
-
-            <?php ActiveForm::end(); ?>
         </div>
     </div>
 </div>
