@@ -16,6 +16,19 @@ use Yii;
  */
 class I18nMessageValidation extends \yii\db\ActiveRecord
 {
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('i18n', 'ID'),
+            'language' => Yii::t('i18n', 'Language'),
+            'translation' => Yii::t('i18n', 'Translation'),
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -34,14 +47,11 @@ class I18nMessageValidation extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
+    public static function tableName()
     {
-        return [
-            'id' => Yii::t('i18n', 'ID'),
-            'language' => Yii::t('i18n', 'Language'),
-            'translation' => Yii::t('i18n', 'Translation'),
-        ];
+        return '{{%i18n_message}}';
     }
+
 
     /**
      * Connection [[I18nSourceMessage]].

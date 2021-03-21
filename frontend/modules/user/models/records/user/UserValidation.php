@@ -70,6 +70,14 @@ class UserValidation extends \yii\db\ActiveRecord
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return '{{%user}}';
+    }
+
+    /**
      * Finds out if password reset token is valid
      *
      * @param string $token password reset token

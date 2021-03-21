@@ -5,18 +5,18 @@ namespace frontend\modules\user\controllers;
 use frontend\modules\user\models\forms\SignInForm;
 use frontend\modules\user\models\forms\PasswordResetRequestForm;
 use frontend\modules\user\models\forms\ResetPasswordForm;
+use frontend\routing\controllers\FrontendController;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\captcha\CaptchaAction;
 use yii\filters\VerbFilter;
 use yii\web\BadRequestHttpException;
-use yii\web\Controller;
 use yii\web\ErrorAction;
 
 /**
  * Site controller
  */
-class SignInController extends Controller
+class SignInController extends FrontendController
 {
     public function behaviors()
     {

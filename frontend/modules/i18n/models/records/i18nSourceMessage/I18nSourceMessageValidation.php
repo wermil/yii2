@@ -16,12 +16,17 @@ use Yii;
  */
 class I18nSourceMessageValidation extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
+    public function attributeLabels()
     {
-        return 'i18n_source_message';
+        return [
+            'id' => Yii::t('i18n', 'ID'),
+            'category' => Yii::t('i18n', 'Category'),
+            'message' => Yii::t('i18n', 'Message'),
+        ];
     }
 
     /**
@@ -39,13 +44,9 @@ class I18nSourceMessageValidation extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
+    public static function tableName()
     {
-        return [
-            'id' => Yii::t('i18n', 'ID'),
-            'category' => Yii::t('i18n', 'Category'),
-            'message' => Yii::t('i18n', 'Message'),
-        ];
+        return '{{%i18n_source_message}}';
     }
 
     /**

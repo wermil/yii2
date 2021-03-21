@@ -3,15 +3,15 @@
 namespace frontend\controllers;
 
 use frontend\models\forms\ContactForm;
+use frontend\routing\controllers\FrontendController;
 use Yii;
 use yii\captcha\CaptchaAction;
-use yii\web\Controller;
 use yii\web\ErrorAction;
 
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends FrontendController
 {
     /**
      * {@inheritdoc}
