@@ -2,9 +2,9 @@
 
 namespace frontend\modules\rbac\behaviors;
 
-use frontend\modules\rbac\models\records\rbacAuthAssignment\RbacAuthAssignment;
 use frontend\modules\rbac\models\records\rbacAuthItem\RbacAuthItem;
 use frontend\modules\user\models\records\user\User;
+use Yii;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
@@ -25,15 +25,14 @@ class AuthAssignmentBehavior extends Behavior
      * Assigning role to a user after creating it
      *
      * @param $event
+     * @throws \Exception
      */
     public function insertingRole($event)
     {
         if ($_user = $this->isOwnerUser()) {
-            $rbacAuthAssignment = new RbacAuthAssignment();
-            $rbacAuthAssignment->item_name = RbacAuthItem::DEFAULT_ROLE;
-            $rbacAuthAssignment->user_id = (string)$_user->id;
-            $rbacAuthAssignment->created_at = time();
-            $rbacAuthAssignment->save();
+            $auth = Yii::$app->authManager;
+            $defaultRole = $auth->getRole(RbacAuthItem::DEFAULT_ROLE);
+            $auth->assign($defaultRole, $_user->id);
         }
     }
 
@@ -47,11 +46,8 @@ class AuthAssignmentBehavior extends Behavior
     public function deletingRole($event)
     {
         if ($_user = $this->isOwnerUser()) {
-            $rbacAuthAssignment = RbacAuthAssignment::find()->where(['user_id' => (string)$_user->id])->one();
-            if ($rbacAuthAssignment !== null) {
-                $rbacAuthAssignment->delete();
-            }
-
+            $auth = Yii::$app->authManager;
+            $auth->revokeAll($_user->id);
         }
     }
 

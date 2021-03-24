@@ -3,10 +3,10 @@
 namespace frontend\modules\user\controllers;
 
 use frontend\layouts\controller\LayoutController;
-use frontend\routing\controllers\BackendController;
 use Yii;
 use frontend\modules\user\models\records\user\User;
 use frontend\modules\user\models\search\UserAdministrationSearch;
+use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -26,8 +26,38 @@ class AdministrationController extends LayoutController
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'permissions' => ['user/view'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['view'],
+                        'permissions' => ['user/view'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'permissions' => ['user/create'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update'],
+                        'permissions' => ['user/update'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['delete'],
+                        'permissions' => ['user/delete'],
+                    ],
+                ],
+            ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],

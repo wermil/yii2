@@ -1,5 +1,9 @@
+<?php
+use yii\helpers\Url;
+?>
+
 <header class="main-header">
-    <a href="" class="logo">
+    <a href="<?=Url::to('/') ?>" class="logo">
         <span class="logo-mini">Yii</span>
         <span class="logo-lg">Yii App</span>
     </a>

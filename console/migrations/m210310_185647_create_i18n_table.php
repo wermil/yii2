@@ -5,8 +5,8 @@
  * @license http://www.yiiframework.com/license/
  */
 
-use yii\db\Migration;
 use frontend\modules\rbac\models\records\rbacAuthItem\RbacAuthItem;
+use yii\db\Migration;
 
 class m210310_185647_create_i18n_table extends Migration
 {
@@ -35,34 +35,46 @@ class m210310_185647_create_i18n_table extends Migration
         $this->createIndex('idx_i18n_source_message-category', '{{%i18n_source_message}}', 'category');
         $this->createIndex('idx_i18n_message-language', '{{%i18n_message}}', 'language');
 
+
         $auth = Yii::$app->authManager;
         $roleAdmin = $auth->getRole(RbacAuthItem::ROLE_ADMIN);
 
-        $createI18n = $auth->createPermission('i18n/create');
-        $createI18n->description = 'Translation Create';
-        $auth->add($createI18n);
+        $create = $auth->createPermission('i18n/create');
+        $create->description = 'Translation Create';
 
-        $viewI18n = $auth->createPermission('i18n/view');
-        $viewI18n->description = 'Translation View';
-        $auth->add($viewI18n);
+        $view = $auth->createPermission('i18n/view');
+        $view->description = 'Translation View';
 
-        $updateI18n = $auth->createPermission('i18n/update');
-        $updateI18n->description = 'Translation Update';
-        $auth->add($updateI18n);
+        $update = $auth->createPermission('i18n/update');
+        $update->description = 'Translation Update';
 
-        $deleteI18n = $auth->createPermission('i18n/delete');
-        $deleteI18n->description = 'Translation Delete';
-        $auth->add($deleteI18n);
+        $delete = $auth->createPermission('i18n/delete');
+        $delete->description = 'Translation Delete';
 
-        $auth->addChild($roleAdmin, $createI18n);
-        $auth->addChild($roleAdmin, $viewI18n);
-        $auth->addChild($roleAdmin, $updateI18n);
-        $auth->addChild($roleAdmin, $deleteI18n);
+        $auth->add($create);
+        $auth->add($view);
+        $auth->add($update);
+        $auth->add($delete);
+
+        $auth->addChild($roleAdmin, $create);
+        $auth->addChild($roleAdmin, $view);
+        $auth->addChild($roleAdmin, $update);
+        $auth->addChild($roleAdmin, $delete);
     }
 
     public function down()
     {
         $this->dropTable('{{%i18n_message}}');
         $this->dropTable('{{%i18n_source_message}}');
+
+        $auth = Yii::$app->authManager;
+        $create = $auth->getPermission('i18n/create');
+        $view = $auth->getPermission('i18n/view');
+        $update = $auth->getPermission('i18n/update');
+        $delete = $auth->getPermission('i18n/delete');
+        $auth->remove($create);
+        $auth->remove($view);
+        $auth->remove($update);
+        $auth->remove($delete);
     }
 }

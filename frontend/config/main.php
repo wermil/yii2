@@ -21,6 +21,7 @@ return [
             'identityClass' => frontend\modules\user\models\records\user\UserIdentity::class,
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'loginUrl' => ['/user/sign-in'],
         ],
         'session' => [
             'class' => yii\redis\Session::class,
@@ -52,6 +53,12 @@ return [
         ],
         'i18n' => [
             'class' => frontend\modules\i18n\I18nModule::class,
+        ],
+        'rbac' => [
+            'class' => frontend\modules\rbac\RbacModule::class,
+        ],
+        'dashboard' => [
+            'class' => frontend\modules\dashboard\DashboardModule::class,
         ],
     ],
     'params' => $params,

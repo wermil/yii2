@@ -40,22 +40,22 @@ return [
             'translations' => [
                 '*' => [
                     'class' => \yii\i18n\DbMessageSource::class,
-                    'sourceMessageTable'=>'{{%i18n_source_message}}',
-                    'messageTable'=>'{{%i18n_message}}',
+                    'sourceMessageTable' => '{{%i18n_source_message}}',
+                    'messageTable' => '{{%i18n_message}}',
                     'enableCaching' => false,
                     'cachingDuration' => 0,
-                    'forceTranslation'=>true,
-                    'sourceLanguage' =>'en_US',
-                    'on missingTranslation' => [frontend\modules\i18n\models\TranslationEventHandler::class, 'handleMissingTranslation']
+                    'forceTranslation' => true,
+                    'sourceLanguage' => 'en_US',
+                    'on missingTranslation' => [frontend\modules\i18n\handlers\TranslationEventHandler::class, 'handleMissingTranslation']
                 ],
             ],
         ],
         'authManager' => [
             'class' => yii\rbac\DbManager::class,
-            'itemTable' =>'rbac_auth_item',
-            'itemChildTable' =>'rbac_auth_item_child',
-            'assignmentTable' =>'rbac_auth_assignment',
-            'ruleTable' =>'rbac_auth_rule',
+            'itemTable' => 'rbac_auth_item',
+            'itemChildTable' => 'rbac_auth_item_child',
+            'assignmentTable' => 'rbac_auth_assignment',
+            'ruleTable' => 'rbac_auth_rule',
         ],
     ],
 ];

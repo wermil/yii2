@@ -1,5 +1,6 @@
 <?php
 
+use frontend\modules\rbac\models\records\rbacAuthItem\RbacAuthItem;
 use yii\db\Migration;
 
 /**
@@ -70,6 +71,48 @@ class m210309_124707_create_rbac_table extends Migration
 
         $this->createIndex('idx-auth_assignment-user_id', '{{%rbac_auth_assignment}}', 'user_id');
         $this->createIndex('idx-auth_item-type', '{{%rbac_auth_item}}', 'type');
+
+
+        $auth = Yii::$app->authManager;
+        $roleAdmin = $auth->createRole(RbacAuthItem::ROLE_ADMIN);
+        $auth->add($roleAdmin);
+
+        $roleUser = $auth->createRole(RbacAuthItem::ROLE_USER);
+        $auth->add($roleUser);
+
+        $roleDemo = $auth->createRole(RbacAuthItem::ROLE_DEMO);
+        $auth->add($roleDemo);
+
+        $createRole = $auth->createPermission('rbac_role/create');
+        $createRole->description = 'Role Create';
+        $auth->add($createRole);
+
+        $deleteRole = $auth->createPermission('rbac_role/delete');
+        $deleteRole->description = 'Role Delete';
+        $auth->add($deleteRole);
+
+        $updateRole = $auth->createPermission('rbac_role/update');
+        $updateRole->description = 'Role Update';
+        $auth->add($updateRole);
+
+        $updatePermission = $auth->createPermission('rbac_permission/update');
+        $updatePermission->description = 'Permission Update';
+        $auth->add($updatePermission);
+
+        $view = $auth->createPermission('rbac/view');
+        $view->description = 'RBAC View';
+        $auth->add($view);
+
+        $viewDashboard = $auth->createPermission('dashboard/view');
+        $viewDashboard->description = 'Dashboard View';
+        $auth->add($viewDashboard);
+
+        $auth->addChild($roleAdmin, $createRole);
+        $auth->addChild($roleAdmin, $deleteRole);
+        $auth->addChild($roleAdmin, $updateRole);
+        $auth->addChild($roleAdmin, $updatePermission);
+        $auth->addChild($roleAdmin, $view);
+        $auth->addChild($roleAdmin, $viewDashboard);
     }
 
     /**
