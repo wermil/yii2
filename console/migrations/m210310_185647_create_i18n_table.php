@@ -6,7 +6,7 @@
  */
 
 use yii\db\Migration;
-use frontend\modules\user\models\records\user\User;
+use frontend\modules\rbac\models\records\rbacAuthItem\RbacAuthItem;
 
 class m210310_185647_create_i18n_table extends Migration
 {
@@ -36,7 +36,7 @@ class m210310_185647_create_i18n_table extends Migration
         $this->createIndex('idx_i18n_message-language', '{{%i18n_message}}', 'language');
 
         $auth = Yii::$app->authManager;
-        $roleAdmin = $auth->getRole(User::ROLE_ADMIN);
+        $roleAdmin = $auth->getRole(RbacAuthItem::ROLE_ADMIN);
 
         $createI18n = $auth->createPermission('i18n/create');
         $createI18n->description = 'Translation Create';

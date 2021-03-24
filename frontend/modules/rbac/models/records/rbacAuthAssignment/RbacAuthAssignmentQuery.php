@@ -3,7 +3,7 @@
 namespace frontend\modules\rbac\models\records\rbacAuthAssignment;
 
 /**
- * RbacAuthAssignment Query.
+ * Rbac Auth Assignment Query.
  */
 class RbacAuthAssignmentQuery extends RbacAuthAssignmentValidation
 {

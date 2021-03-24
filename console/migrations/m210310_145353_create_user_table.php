@@ -1,7 +1,7 @@
 <?php
 
 use yii\db\Migration;
-use \frontend\modules\user\models\records\user\User;
+use frontend\modules\rbac\models\records\rbacAuthItem\RbacAuthItem;
 
 class m210310_145353_create_user_table extends Migration
 {
@@ -23,13 +23,13 @@ class m210310_145353_create_user_table extends Migration
         ]);
 
         $auth = Yii::$app->authManager;
-        $roleAdmin = $auth->createRole(User::ROLE_ADMIN);
+        $roleAdmin = $auth->createRole(RbacAuthItem::ROLE_ADMIN);
         $auth->add($roleAdmin);
 
-        $roleUser = $auth->createRole(User::ROLE_USER);
+        $roleUser = $auth->createRole(RbacAuthItem::ROLE_USER);
         $auth->add($roleUser);
 
-        $roleDemo = $auth->createRole(User::ROLE_DEMO);
+        $roleDemo = $auth->createRole(RbacAuthItem::ROLE_DEMO);
         $auth->add($roleDemo);
 
 

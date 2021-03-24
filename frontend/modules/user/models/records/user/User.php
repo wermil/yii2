@@ -7,11 +7,10 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
- * User.
+ * User
  */
 class User extends UserIdentity
 {
-
     /**
      * {@inheritdoc}
      */

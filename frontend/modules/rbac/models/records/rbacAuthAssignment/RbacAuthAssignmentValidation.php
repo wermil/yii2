@@ -2,16 +2,17 @@
 
 namespace frontend\modules\rbac\models\records\rbacAuthAssignment;
 
+use frontend\modules\rbac\models\records\rbacAuthItem\RbacAuthItem;
 use Yii;
 
 /**
- * This is the model class for table "rbac_auth_assignment".
+ * Rbac Auth Assignment Validation.
  *
  * @property string $item_name
  * @property string $user_id
  * @property int|null $created_at
  *
-// * @property RbacAuthItem $itemName
+ * @property RbacAuthItem $itemName
  */
 class RbacAuthAssignmentValidation extends \yii\db\ActiveRecord
 {
@@ -33,7 +34,7 @@ class RbacAuthAssignmentValidation extends \yii\db\ActiveRecord
             [['created_at'], 'integer'],
             [['item_name', 'user_id'], 'string', 'max' => 64],
             [['user_id'], 'unique'],
-//            [['item_name'], 'exist', 'skipOnError' => true, 'targetClass' => RbacAuthItem::className(), 'targetAttribute' => ['item_name' => 'name']],
+            [['item_name'], 'exist', 'skipOnError' => true, 'targetClass' => RbacAuthItem::class, 'targetAttribute' => ['item_name' => 'name']],
         ];
     }
 
@@ -49,13 +50,13 @@ class RbacAuthAssignmentValidation extends \yii\db\ActiveRecord
         ];
     }
 
-//    /**
-//     * Gets query for [[ItemName]].
-//     *
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getItemName()
-//    {
-//        return $this->hasOne(RbacAuthItem::className(), ['name' => 'item_name']);
-//    }
+    /**
+     * Gets query for [[ItemName]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getItemName()
+    {
+        return $this->hasOne(RbacAuthItem::class, ['name' => 'item_name']);
+    }
 }
