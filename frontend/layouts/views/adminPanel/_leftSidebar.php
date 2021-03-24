@@ -1,6 +1,6 @@
 <?php
 
-use frontend\layouts\models\AdminLteHelper;
+use frontend\layouts\helpers\AdminLteHelper;
 use yii\helpers\Url;
 
 ?>
