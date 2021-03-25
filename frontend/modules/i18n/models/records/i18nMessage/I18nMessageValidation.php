@@ -23,7 +23,7 @@ class I18nMessageValidation extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('i18n', 'ID'),
+            'id' => Yii::t('app', 'ID'),
             'language' => Yii::t('i18n', 'Language'),
             'translation' => Yii::t('i18n', 'Translation'),
         ];

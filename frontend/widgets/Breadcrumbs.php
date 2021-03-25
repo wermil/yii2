@@ -5,20 +5,13 @@ namespace frontend\widgets;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * Breadcrumbs
  */
 class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
 {
-    /**
-     * {@inheritdoc}
-     */
-    public $homeLink = [
-        'label' => 'Yii App',
-        'url' => '/user/administration',
-    ];
-
     /**
      * Renders the widget.
      * @throws InvalidConfigException
@@ -33,8 +26,8 @@ class Breadcrumbs extends \yii\bootstrap4\Breadcrumbs
         $links = [];
         if ($this->homeLink === null) {
             $links[] = $this->renderItem([
-                'label' => Yii::t('yii', 'Home'),
-                'url' => Yii::$app->homeUrl,
+                'label' => Yii::t('dashboard', 'Dashboard'),
+                'url' => Url::to('/dashboard/main'),
             ], $this->itemTemplate);
         } elseif ($this->homeLink !== false) {
             $links[] = $this->renderItem($this->homeLink, $this->itemTemplate);

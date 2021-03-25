@@ -67,8 +67,8 @@ class RbacAuthItemValidation extends \yii\db\ActiveRecord
             'description' => Yii::t('rbac', 'Description'),
             'rule_name' => Yii::t('rbac', 'Rule Name'),
             'data' => Yii::t('rbac', 'Data'),
-            'created_at' => Yii::t('rbac', 'Created At'),
-            'updated_at' => Yii::t('rbac', 'Updated At'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
 

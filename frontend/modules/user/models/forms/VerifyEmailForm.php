@@ -5,6 +5,7 @@ namespace frontend\modules\user\models\forms;
 use frontend\modules\user\models\records\user\User;
 use yii\base\InvalidArgumentException;
 use yii\base\Model;
+use Yii;
 /**
  * Verify Email Form
  *
@@ -27,11 +28,11 @@ class VerifyEmailForm extends Model
     public function __construct( $token, $config = [])
     {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidArgumentException('Verify email token cannot be blank.');
+            throw new InvalidArgumentException(Yii::t('user','Verify email token cannot be blank.'));
         }
         $this->_user = User::findByVerificationToken($token);
         if (!$this->_user) {
-            throw new InvalidArgumentException('Wrong verify email token.');
+            throw new InvalidArgumentException(Yii::t('user','Wrong verify email token.'));
         }
         parent::__construct($config);
     }

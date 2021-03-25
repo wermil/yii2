@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'status')->textInput() ?>
 
         <div class="row form-group">
-            <?= Html::submitButton(Yii::t('user-administration', 'Save'), ['class' => 'btn btn-success mx-auto']) ?>
+            <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success mx-auto']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

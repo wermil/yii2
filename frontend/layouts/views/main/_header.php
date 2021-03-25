@@ -13,8 +13,8 @@ NavBar::begin([
 ]);
 $menuItems = [];
 if (Yii::$app->user->isGuest) {
-    $menuItems[] = ['label' => Yii::t('site', 'Sign in'), 'url' => ['/user/sign-in'], 'linkOptions' => ['class' => 'btn btn-outline-secondary text-light ml-auto']];
-    $menuItems[] = ['label' => Yii::t('site', 'Sign up'), 'url' => ['/user/sign-up'], 'linkOptions' => ['class' => 'btn btn-outline-secondary text-light']];
+    $menuItems[] = ['label' => Yii::t('user', 'Sign in'), 'url' => ['/user/sign-in'], 'linkOptions' => ['class' => 'btn btn-outline-secondary text-light ml-auto']];
+    $menuItems[] = ['label' => Yii::t('user', 'Sign up'), 'url' => ['/user/sign-up'], 'linkOptions' => ['class' => 'btn btn-outline-secondary text-light']];
     $navOptions = ['class' => 'navbar-nav ml-auto'];
 } else {
     $menuItems[] = ['label' => Yii::t('site', 'Admin Panel'), 'url' => ['/dashboard/main'], 'linkOptions' => ['class' => 'btn btn-outline-secondary text-light mr-auto']];
@@ -22,11 +22,11 @@ if (Yii::$app->user->isGuest) {
     $menuItems[] = '<li class="ml-auto nav-item">'
         . Html::beginForm(['/user/sign-in/sign-out'], 'post')
         . Html::submitButton(
-            Yii::t('site', 'Sign out') . ' (' . Yii::$app->user->identity->email . ')',
+            Yii::t('user', 'Sign out') . ' (' . Yii::$app->user->identity->email . ')',
             [
                 'class' => 'btn btn-outline-secondary text-light nav-link',
                 'data' => [
-                    'confirm' => Yii::t('site', 'Are you sure you want to sign out?'),
+                    'confirm' => Yii::t('user', 'Are you sure you want to sign out?'),
                     'method' => 'post',
                 ],
             ]

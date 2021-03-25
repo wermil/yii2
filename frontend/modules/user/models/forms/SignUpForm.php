@@ -35,13 +35,13 @@ class SignUpForm extends Model
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => User::class, 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => User::class, 'message' =>Yii::t('user','This email address has already been taken.') ],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 8],
 
             ['nickname', 'trim'],
-            ['nickname', 'unique', 'targetClass' => User::class, 'message' => 'This nickname has already been taken.'],
+            ['nickname', 'unique', 'targetClass' => User::class, 'message' => Yii::t('user','This nickname has already been taken.')],
             ['nickname', 'string', 'min' => 2, 'max' => 255],
 
             ['first_name', 'trim'],
@@ -90,7 +90,7 @@ class SignUpForm extends Model
             )
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
             ->setTo($this->email)
-            ->setSubject('Account registration at ' . Yii::$app->name)
+            ->setSubject(Yii::t('user','Account registration at ') . Yii::$app->name)
             ->send();
     }
 }

@@ -32,7 +32,7 @@ class UserValidation extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('user', 'ID'),
+            'id' => Yii::t('app', 'ID'),
             'email' => Yii::t('user', 'Email'),
             'nickname' => Yii::t('user', 'Nickname'),
             'first_name' => Yii::t('user', 'First Name'),
@@ -41,9 +41,9 @@ class UserValidation extends \yii\db\ActiveRecord
             'verification_token' => Yii::t('user', 'Verification Token'),
             'password_hash' => Yii::t('user', 'Password Hash'),
             'password_reset_token' => Yii::t('user', 'Password Reset Token'),
-            'status' => Yii::t('user', 'Status'),
-            'created_at' => Yii::t('user', 'Created At'),
-            'updated_at' => Yii::t('user', 'Updated At'),
+            'status' => Yii::t('app', 'Status'),
+            'created_at' => Yii::t('app', 'Created At'),
+            'updated_at' => Yii::t('app', 'Updated At'),
         ];
     }
 

@@ -9,7 +9,7 @@ use yii\helpers\Html;
 /* @var $searchModel frontend\modules\user\models\search\UserAdministrationSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('user-administration', 'Users');
+$this->title = Yii::t('user', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <section class="content-header px-0 pb-1">
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="user-index">
         <?php if (Yii::$app->user->can('user/create')) : ?>
             <p>
-                <?= Html::a(Yii::t('user-administration', 'Create User'), ['create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a(Yii::t('user', 'Create User'), ['create'], ['class' => 'btn btn-success']) ?>
             </p>
         <?php endif; ?>
         <div class="table-responsive">
@@ -39,8 +39,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     'first_name',
                     'last_name',
                     'status',
+                    'created_at',
                     [
                         'class' => ActionColumn::class,
+                        'template' => '{view} {update} {delete}',
+                        'buttons' => [
+                            'view' => function ($url, $model, $key) {
+                                return Html::a('', $url, ['class' => 'fas fa-eye fa-lg text-info px-1']);
+                            },
+                            'update' => function ($url, $model, $key) {
+                                return Html::a('', $url, ['class' => 'fas fa-pencil-alt fa-lg text-warning px-1']);
+                            },
+                            'delete' => function ($url, $model, $key) {
+                                return Html::a('', $url, ['class' => 'fas fa-trash fa-lg text-danger px-1', 'data' => [
+                                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                                    'method' => 'post',
+                                ]]);
+                            },
+                        ],
                         'visibleButtons' => [
                             'view' => Yii::$app->user->can('user/view'),
                             'update' => Yii::$app->user->can('user/update'),
@@ -51,4 +67,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
         </div>
     </div>
+    <div class="text-danger"></div>
 </section>
