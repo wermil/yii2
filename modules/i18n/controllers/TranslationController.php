@@ -2,19 +2,17 @@
 
 namespace app\modules\i18n\controllers;
 
-use app\modules\i18n\models\forms\LanguageSelectForm;
 use Yii;
-use app\modules\i18n\models\records\i18nLanguage\I18nLanguage;
-use app\modules\i18n\models\search\I18nLanguageSearch;
-use yii\helpers\Url;
+use app\modules\i18n\models\records\i18nMessage\I18nMessage;
+use app\modules\i18n\models\search\TranslationSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * LanguageController implements the CRUD actions for I18nLanguage model.
+ * TranslationController implements the CRUD actions for I18nMessage model.
  */
-class LanguageController extends Controller
+class TranslationController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -26,19 +24,18 @@ class LanguageController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
-                    'set' => ['POST'],
                 ],
             ],
         ];
     }
 
     /**
-     * Lists all I18nLanguage models.
+     * Lists all I18nMessage models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new I18nLanguageSearch();
+        $searchModel = new TranslationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -48,29 +45,30 @@ class LanguageController extends Controller
     }
 
     /**
-     * Displays a single I18nLanguage model.
+     * Displays a single I18nMessage model.
      * @param integer $id
+     * @param string $language
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($id, $language)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($id, $language),
         ]);
     }
 
     /**
-     * Creates a new I18nLanguage model.
+     * Creates a new I18nMessage model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new I18nLanguage();
+        $model = new I18nMessage();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id, 'language' => $model->language]);
         }
 
         return $this->render('create', [
@@ -79,18 +77,19 @@ class LanguageController extends Controller
     }
 
     /**
-     * Updates an existing I18nLanguage model.
+     * Updates an existing I18nMessage model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
+     * @param string $language
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $language)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($id, $language);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id, 'language' => $model->language]);
         }
 
         return $this->render('update', [
@@ -99,46 +98,31 @@ class LanguageController extends Controller
     }
 
     /**
-     * Deletes an existing I18nLanguage model.
+     * Deletes an existing I18nMessage model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
+     * @param string $language
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($id, $language)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($id, $language)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Set Language
-     */
-    public function actionSet()
-    {
-        $_languageSelectForm = new LanguageSelectForm();
-        $_languageSelectForm->identifier = (string)Yii::$app->request->post('identifier');
-        $_languageSelectForm->url = (string)Yii::$app->request->post('url');
-        if ($_languageSelectForm->validate()) {
-            {
-                $_languageSelectForm->setIdentifier();
-                return $this->redirect($_languageSelectForm->url);
-            }
-        }
-        return $this->redirect(Url::to('/'));
-    }
-
-    /**
-     * Finds the I18nLanguage model based on its primary key value.
+     * Finds the I18nMessage model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return I18nLanguage the loaded model
+     * @param string $language
+     * @return I18nMessage the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($id, $language)
     {
-        if (($model = I18nLanguage::findOne($id)) !== null) {
+        if (($model = I18nMessage::findOne(['id' => $id, 'language' => $language])) !== null) {
             return $model;
         }
 

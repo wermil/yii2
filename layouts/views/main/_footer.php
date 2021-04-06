@@ -9,12 +9,12 @@ use yii\helpers\Url;
         <div class="d-flex align-items-center py-1 my-2">
             <p class="text-muted m-0"><?= Html::encode(Yii::$app->name) ?> © 2021 by Wermil</p>
             <div class="ml-auto">
-                <?= Html::a('RU', Url::to('/i18n/language'), ['class' => 'px-2 mx-1', 'data-method' => 'POST',
+                <?= Html::a('RU', Url::to('/i18n/language/set'), ['class' => 'px-2 mx-1', 'data-method' => 'POST',
                     'data-params' => [
                         'identifier' => 'ru-RU',
                         'url' => Url::current()
                     ]]) ?>
-                <?= Html::a('EN', Url::to('/i18n/language'), ['class' => 'px-2 mx-1', 'data-method' => 'POST',
+                <?= Html::a('EN', Url::to('/i18n/language/set'), ['class' => 'px-2 mx-1', 'data-method' => 'POST',
                     'data-params' => [
                         'identifier' => 'en-US',
                         'url' => Url::current()
